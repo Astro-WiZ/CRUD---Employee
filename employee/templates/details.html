@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block bs %}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+{% block style %}
+.id-card {
+    width: 400px;
+    border: 3px solid #007bff;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+.id-card-header {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 0;
+    border-radius: 10px 10px 0 0;
+}
+.id-card img {
+    border-radius: 10px;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 20px 0;
+}
+.id-card h5 {
+    margin-bottom: 10px;
+    color: #007bff;
+    font-size: 20px;
+    font-weight: bold;
+}
+.id-card p {
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #333;
+}
+.id-card .info {
+    text-align: left;
+    padding: 0 30px;
+}
+.id-card .info strong {
+    color: #007bff;
+}
+.id-card-footer {
+    background-color: #f1f1f1;
+    padding: 10px 0;
+    border-radius: 0 0 10px 10px;
+    font-size: 14px;
+    color: #555;
+}
+{% endblock %}
+
+{% block title%}{{employee.name}}{% endblock %}
+
+
+{% block content %}
+<div class="container d-flex justify-content-center mt-5">
+    <div class="id-card">
+        <div class="id-card-header">
+            <h4>Employee ID Card</h4>
+        </div>
+        <img src="/media/{{employee.picture}}" alt="Employee Photo">
+        <h5>{{employee.name}}</h5>
+        <div class="info">
+            <p><strong>Employee ID:</strong> {{employee.eID}}</p>
+            <p><strong>Designation:</strong>{{employee.designation}}</p>
+            <p><strong>Address:</strong> {{employee.address}}</p>
+            <p><strong>Phone:</strong> {{employee.phone}}</p>
+
+        </div>
+        <div class="id-card-footer">
+            Taylor Gang | www.wizkhalifa.com
+        </div>
+    </div>
+</div>
+{% endblock %}

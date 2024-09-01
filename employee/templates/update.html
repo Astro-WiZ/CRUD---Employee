@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block bs %}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+{% block style %}
+.form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+{% endblock %}
+{% block title %}Update Employee{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="form-container">
+        <h3 class="form-title">Update Employee Details</h3>
+        <form method = "post", enctype = "multipart/form-data" >
+            {% csrf_token %}
+            <!-- Name -->
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input name = "name" type="text" class="form-control"  value = {{employee.name}} required>
+            </div>
+
+            <!-- Employee ID -->
+            <div class="form-group">
+                <label for="eID">Employee ID</label>
+                <input name = "eID" type="text" class="form-control" value = {{employee.eID}} required>
+            </div>
+            
+            <!-- Designation -->
+            <div class="form-group">
+                <label for="designation">Designation</label>
+                <input name="designation"  type="text" class="form-control" value = {{employee.designation}} required>
+            </div>
+            <!-- Address -->
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea  name ="address" class="form-control" rows="3" required>{{employee.address}}</textarea>
+            </div>
+
+            
+            <!-- Salary -->
+            <div class="form-group">
+                <label for="salary">Salary</label>
+                <input name = "salary" type="number" class="form-control" value = {{employee.salary}} required>
+            </div>
+            
+            <!-- Phone -->
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input name = "phone" type="tel" class="form-control" value = {{employee.phone}} required>
+            </div>
+            
+            <!-- Picture -->
+            <div class="form-group">
+                <label for="picture">Picture</label>
+                <input name = "picture" type="file" class="form-control-file" accept="image/*">
+            </div>
+            
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

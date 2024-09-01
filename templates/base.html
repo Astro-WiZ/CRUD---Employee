@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    {% block bs %}{% endblock %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color:#007bff;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            margin: 20px;
+            text-align: center;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+        }
+        nav a:hover {
+            color: #007bff;
+        }
+        .content {
+            text-align: center;
+            margin-top: 50px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        {% block style %}{% endblock %}        
+    </style>
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+</head>
+<body>
+    <header>
+        <h1>{% block header %}{% endblock %}</h1>
+    </header>
+
+    <div class="container">
+        <div class ="mb-5">
+            <nav>
+                <a href="/">Home Page</a> 
+                <a href="/add-employee/">add-employee</a>
+                <a href="/list-of-employees/">all-employee</a> 
+            </nav>
+        </div>
+    <div>
+    {% block content %}
+    
+    {% endblock %}
+    
+</body>
+</html>
