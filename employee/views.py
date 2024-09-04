@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from .models import *
-
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 # Function for creating a new employee
+@login_required(login_url="/login")
 def addEmployee(request):
     if request.method == "POST":
         data = request.POST
@@ -34,6 +38,7 @@ def addEmployee(request):
 
 
 # Function that returns employee ID Card
+@login_required(login_url="/login")
 def idCard(request, id):
     queryset = Employee.objects.get(id = id)
     # queryset = get_object_or_404(Employee, id=id)
@@ -42,6 +47,7 @@ def idCard(request, id):
     return render(request, "details.html",context)
 
 # Function to pass employee details in table
+@login_required(login_url="/login")
 def table(request):
     queryset = Employee.objects.all()
     if request.GET.get('search'):
@@ -51,6 +57,7 @@ def table(request):
     return render(request,'table.html',context)
 
 # delete the employee from table
+@login_required(login_url="/login")
 def delete(request, id):
     queryset = Employee.objects.get(id = id)
     queryset.delete()
@@ -58,6 +65,7 @@ def delete(request, id):
 
 
 # Update the employee details
+@login_required(login_url="/login")
 def update(request, id):
     queryset = Employee.objects.get(id = id)
     if request.method == "POST":
@@ -90,3 +98,68 @@ def update(request, id):
 
 def home(request):
     return render(request,'index.html')
+
+
+def login_page(request):
+    
+    if request.method =="POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        if not User.objects.filter(username=username).exists():
+            messages.error(request,"User doesn't exist")
+            return redirect("/login/")
+        
+        user = authenticate(username=username,password=password)
+        
+        if user is None:
+            messages.error(request,"Invalid Password.")
+            return redirect("/login/")
+        
+        else:
+            login(request,user)
+            return redirect("/list-of-employees/")
+        
+        
+    if request.user.is_authenticated:
+        messages.info(request,"User Logged Out.")
+        logout(request)     
+    return render(request, "login.html")
+
+def logout_page(request):
+    logout(request)
+    messages.info(request,'logout successful.')
+    return redirect("/login/")
+    
+
+def register(request):
+    
+    if request.method == "POST":
+        data = request.POST
+        first_name = data.get('first_name')
+        last_name = data.get('last_name')
+        username = data.get('username')
+        password =data.get('password')
+        
+        
+        user = User.objects.filter(username = username)
+        
+        if user.exists():
+            messages.error(request,"Username already taken.")
+            return redirect('/register/')
+        
+        user = User.objects.create(
+            first_name = first_name,
+            last_name = last_name,
+            username = username,
+        )
+        user.set_password(password)
+        user.save()
+
+        messages.success(request,"User succesfully created.")
+        return redirect('/register/')
+
+    if request.user.is_authenticated:
+        messages.info(request,"User Logged Out.")
+        logout(request)
+    return render(request, "register.html")

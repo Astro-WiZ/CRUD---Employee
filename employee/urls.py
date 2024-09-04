@@ -9,6 +9,8 @@ urlpatterns = [
     path('list-of-employees/', table, name = "list_of_employees" ),
     path('delete-employee/<id>/', delete, name = "delete_employee"),
     path('update-employee/<id>/', update, name = "update_employee"),
-    path('',home, name="home")
-    
+    path('',home, name="home"),
+    path('login/',login_page, name="login-page"),
+    path('register/',register, name="register"),  
+    path('logout/',logout_page, name="logout-page") , 
 ]

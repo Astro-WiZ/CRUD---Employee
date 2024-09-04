@@ -13,24 +13,24 @@
             padding: 0;
             background-color: #f4f4f4;
         }
-        header {
-            background-color:#007bff;
-            color: #fff;
-            padding: 10px 0;
+        .welcome {
+            margin:50px 0;
+            background-color:none;
+            color: black;
+            padding: 20px 0;
             text-align: center;
         }
         nav {
-            margin: 20px;
             text-align: center;
         }
         nav a {
             margin: 0 15px;
             text-decoration: none;
-            color: #333;
+            color: white;
             font-size: 18px;
         }
         nav a:hover {
-            color: #007bff;
+            color: black;
         }
         .content {
             text-align: center;
@@ -50,21 +50,33 @@
     <title>
         {% block title %}{% endblock %}
     </title>
-</head>
-<body>
-    <header>
-        <h1>{% block header %}{% endblock %}</h1>
-    </header>
 
-    <div class="container">
-        <div class ="mb-5">
-            <nav>
-                <a href="/">Home Page</a> 
-                <a href="/add-employee/">add-employee</a>
-                <a href="/list-of-employees/">all-employee</a> 
-            </nav>
+    <nav class="navbar bg-primary">
+        <div class="container-fluid">
+            <a href="/">Home Page</a> 
+            <a href="/add-employee/">Add Employee</a>
+            <a href="/list-of-employees/">View Employee</a> 
+           {% if request.user.is_authenticated %}
+            <a href= "/logout/" class="btn btn-danger" type="submit">Logout</a>
+            {% else %}
+            <div class = "Login">
+                <a href = "/login/" class="btn btn-success" type="submit">Login</a>
+                <a href="/register/" class="btn btn-success" type="submit">SignUp</a>
+            </div>
+            {% endif %}
+          </form>
         </div>
-    <div>
+      </nav>
+</head>
+<div class = "welcome">
+  {% block div %}{% endblock %}
+</div>
+
+<body>
+    
+
+
+
     {% block content %}
     
     {% endblock %}

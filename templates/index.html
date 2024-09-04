@@ -1,15 +1,21 @@
 {% extends "base.html" %}
 
 {% block title %}Home Page{% endblock %}
-{% block header %}Welcome to myProject Django.{% endblock %}
+
+{% block bs %}<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">{% endblock %}
+{% block div %}
+<h1>Welcome to myProject Django.</h1>
+{% endblock %}
+
+
 {% block content %}
 
-    <div class="content">
-        <h2>Home Page</h2>
-        <p>This is Home page. Use the navigation above to visit other sections to add or view the employee details.</p>
-    </div>
+<div class="content">
+    <h2>Home Page</h2>
+    <p>This is Home page. Use the navigation above to visit other sections to add or view the employee details.</p>
+</div>
 
-    <footer>
-        <p>&copy; 2024 Your Company Name. All rights reserved.</p>
-    </footer>
+<footer>
+    <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+</footer>
 {% endblock %}
